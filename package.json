@@ -1,17 +1,42 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "opentable-menu-service",
+  "description": "Project description",
   "author": "",
-  "license": "",
+  "main": "./src/index.js",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
+  },
   "scripts": {
+    "start": "nodemon src/server/index.js",
+    "build": "webpack -d --watch",
+    "db:setup": "node src/database/seed.js"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "jquery": "^3.4.1",
+    "mongodb": "^3.3.5",
+    "mongoose": "^5.7.13",
+    "nodemon": "^2.0.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "underscore": "^1.9.1",
+    "webpack": "^4.41.2"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "webpack-cli": "^3.3.10"
   }
 }
