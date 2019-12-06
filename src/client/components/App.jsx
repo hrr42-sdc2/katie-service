@@ -54,8 +54,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="tittle">
-        <h5 className='menu-title'>Menu</h5>
+        <div className="title">
+        <h5>Menu</h5>
         </div>
 
         <div>

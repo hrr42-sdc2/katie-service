@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SingleItem = (props) => (
-<div className="menu-list">
+<div>
 <div className="item-name">{props.itemList.item}</div>
 <div className="item-price">
 ${props.itemList.price}</div>
