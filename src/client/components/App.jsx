@@ -55,7 +55,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="tittle">
-        <h5>Menu</h5>
+        <h5 className='menu-title'>Menu</h5>
         </div>
 
         <div>
