@@ -14,7 +14,7 @@ const menuSchema = new mongoose.Schema({
 
 const MenuList = mongoose.model('MenuList', menuSchema);
 
-// MenuList.find({menuType: "wine"}, function(err,doc) {
+// MenuList.find({restaurant_id: 0}, function(err,doc) {
 //   doc.forEach((item,index) =>{
 //     item.remove(function(err,doc) {
 //       console.log(doc);

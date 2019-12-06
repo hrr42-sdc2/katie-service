@@ -55,11 +55,11 @@ class App extends React.Component {
     return (
       <div>
         <div className="tittle">
-        <h4>Menu</h4>
+        <h5>Menu</h5>
         </div>
 
         <div>
-        <span><button onClick={() => this.UpdateDinnerMenu()} > Dinner List </button></span>
+        <span><button onClick={() => this.UpdateDinnerMenu()} > Dinner Menu </button></span>
         <span><button onClick={() => this.UpdateWineMenu()} > Wine List </button></span>
         </div>
 
