@@ -17,10 +17,10 @@ class App extends React.Component {
 
   UpdateDinnerMenu() {
     $.ajax({
-      url: 'http://localhost:27017/api/dinner',
+      url: 'http://localhost:3003/api/dinner',
       method: 'GET',
       success: data => { console.log(data);
-      this.setState({postData: data});
+      this.setState({view: 'dinner', postData: data});
       },
       error: () => {console.log('GET error!');}
     });
@@ -28,10 +28,10 @@ class App extends React.Component {
 
   UpdateWineMenu() {
     $.ajax({
-      url: 'http://localhost:27017/api/wine',
+      url: 'http://localhost:3003/api/wine',
       method: 'GET',
       success: data => { console.log(data);
-      this.setState({postData: data});
+      this.setState({view: 'wine', postData: data});
       },
       error: () => {console.log('GET error!');}
     });
@@ -41,13 +41,10 @@ class App extends React.Component {
     this.UpdateDinnerMenu();
   }
 
-  changeView(option) {
-    this.setState({
-      view: option
-    });
-  }
-
   renderView() {
+    const {view} = this.state;
+
+    if (view === 'dinner') {
       let starters = this.state.postData.filter(function(meal) {
         return meal.category === 'Starters'
       });
@@ -60,27 +57,33 @@ class App extends React.Component {
       let seafood = this.state.postData.filter(function(meal) {
         return meal.category === 'Seafood'
       });
-      let wine = this.state.postData;
 
       return (
         <div className='lists'>
           <div className='list1'>Starters</div>
           <Menu menuList={starters} />
-
+          <hr />
           <div className='list2'>Steaks & Chops</div>
           <Menu menuList={steaks} />
-
+          <hr />
           <div className='list3'>Bone-In Cuts</div>
           <Menu menuList={bone} />
-
+          <hr />
           <div className='list4'>Seafood</div>
           <Menu menuList={seafood} />
-
-          <div>Wine</div>
-          <Menu menuList={wine} />
+          <hr />
         </div>
 
       );
+  } else {
+    return (
+      <div>
+      <div className='list5'>Wine</div>
+
+      <Menu menuList={this.state.postData} />
+      </div>
+    )
+  }
 
   }
 
@@ -89,14 +92,16 @@ class App extends React.Component {
       <div>
         <div className="title">
         <h5>Menu</h5>
+        <hr />
         </div>
 
         <div>
         <span><button onClick={() => this.UpdateDinnerMenu()} > Dinner Menu </button></span>
         <span><button onClick={() => this.UpdateWineMenu()} > Wine List </button></span>
+        <hr />
         </div>
 
-        <div className="menuList">
+        <div>
           {this.renderView()}
         </div>
 

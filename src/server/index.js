@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const MenuList = require('../database/index.js');
 
 const app = express();
-const Port = 27017;
+const Port = 3003;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
