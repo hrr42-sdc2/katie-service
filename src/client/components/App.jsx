@@ -5,12 +5,12 @@ import $ from 'jquery';
 import Menu from './Menu.jsx';
 import SingleItem from './SingleItem.jsx';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: 'dinner',
-      haveData: false,
       postData: []
     }
   }
@@ -48,7 +48,40 @@ class App extends React.Component {
   }
 
   renderView() {
-      return <Menu menuList={this.state.postData} />
+      let starters = this.state.postData.filter(function(meal) {
+        return meal.category === 'Starters'
+      });
+      let steaks = this.state.postData.filter(function(meal) {
+        return meal.category === 'Steaks & Chops'
+      });
+      let bone = this.state.postData.filter(function(meal) {
+        return meal.category === 'Bone-In Cuts'
+      });
+      let seafood = this.state.postData.filter(function(meal) {
+        return meal.category === 'Seafood'
+      });
+      let wine = this.state.postData;
+
+      return (
+        <div className='lists'>
+          <div className='list1'>Starters</div>
+          <Menu menuList={starters} />
+
+          <div className='list2'>Steaks & Chops</div>
+          <Menu menuList={steaks} />
+
+          <div className='list3'>Bone-In Cuts</div>
+          <Menu menuList={bone} />
+
+          <div className='list4'>Seafood</div>
+          <Menu menuList={seafood} />
+
+          <div>Wine</div>
+          <Menu menuList={wine} />
+        </div>
+
+      );
+
   }
 
   render() {
