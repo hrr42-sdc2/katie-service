@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
+const db = require('./menu.js');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true });
 
 const menuSchema = new mongoose.Schema({
   restaurant_id: {type:Number, unique: true},
@@ -14,7 +14,7 @@ const menuSchema = new mongoose.Schema({
 
 const MenuList = mongoose.model('MenuList', menuSchema);
 
-// MenuList.find({menuType:'wine'}, function(err,doc) {
+// MenuList.find({menuType:'dinner'}, function(err,doc) {
 //   doc.forEach((item,index) =>{
 //     item.remove(function(err,doc) {
 //       console.log(doc);
@@ -25,7 +25,7 @@ const MenuList = mongoose.model('MenuList', menuSchema);
 
 let fetch = (menuOrder, cb) => {
   MenuList
-  .find({restaurant_id: 000, menuType: menuOrder})
+  .find({restaurant_id: 100, menuType: menuOrder})
   .exec((err, menu) => {
     if (err) {
       console.log("Cannot get menu" + menuOrder)
