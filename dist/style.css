@@ -7,26 +7,28 @@ body {
 }
 
 .title {
-  font-weight: 500;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 25px;
+  margin: -5px 0px;
 }
 
 .list {
   column-count: 2;
 }
 
-
-
 .list1, .list2, .list3, .list4, .list5{
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.60em;
-  padding: 0px 0px 5px 0px;
+  font-size: 15px;
+  padding: 7px 0px 7px 0px;
   font-weight: 500;
 }
 
 
 .item-name {
+  font-family: 'Josefin Sans', sans-serif;
   color:black;
-  font-size: 0.45em;
+  font-size: 12px;
   font-weight: 500;
   width:80%;
   padding: 5px 0px;
@@ -35,21 +37,23 @@ body {
 
 .item-description {
   color: black;
-  font-size: 0.45em;
+  font-size: 10px;
+  width:90%;
   padding:0px 0px 8px 0px;
   font-weight: 200;
 }
 
 .item-price {
   color: black;
-  font-size: 0.45em;
+  font-size: 10px;
   font-weight:500;
   padding: 5px 0px;
 }
 
 button{
-  font-size: 0.45em;
-  padding: 5.3px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  padding: 8px;
   margin: 8px 8px 8px 0px;
   font-weight:500;
   color:	rgb(64,64,64);
