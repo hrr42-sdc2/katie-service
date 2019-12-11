@@ -16,7 +16,8 @@
   "scripts": {
     "start": "nodemon src/server/index.js",
     "build": "webpack -d --watch",
-    "db:setup": "node src/database/seed.js"
+    "db:setup": "node src/database/seed.js",
+    "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -36,6 +37,8 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
     "webpack-cli": "^3.3.10"
   }
