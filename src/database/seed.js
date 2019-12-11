@@ -1,8 +1,9 @@
 const MenuList = require('./index.js');
+const db = require('./menu.js');
 
 const sampleMenu = [
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Starters",
     item: "Perry's Signature Fried Asparagus",
@@ -10,7 +11,7 @@ const sampleMenu = [
     price: 19.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Starters",
     item: "Perry's Famous Pork Chop 'Bites'",
@@ -18,7 +19,7 @@ const sampleMenu = [
     price: 13.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Starters",
     item: "Cherry Pepper Calamari'",
@@ -26,7 +27,7 @@ const sampleMenu = [
     price: 17.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Starters",
     item: "Seafood Stuffed Mushrooms'",
@@ -34,7 +35,7 @@ const sampleMenu = [
     price: 12.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Starters",
     item: "Beef & Bleu *",
@@ -42,7 +43,7 @@ const sampleMenu = [
     price: 14.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Starters",
     item: "Crab Cakes",
@@ -50,7 +51,7 @@ const sampleMenu = [
     price: 19.50
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Steaks & Chops",
     item: "Prime Ribeye* 14 Oz.",
@@ -58,7 +59,7 @@ const sampleMenu = [
     price: 50.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Steaks & Chops",
     item: "Prime New York Strip* 14 Oz.",
@@ -66,7 +67,7 @@ const sampleMenu = [
     price: 50.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Steaks & Chops",
     item: "Filet Mignon* 6 Oz.",
@@ -74,7 +75,7 @@ const sampleMenu = [
     price: 41.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Steaks & Chops",
     item: "Filet Mignon* 8 Oz.",
@@ -82,7 +83,7 @@ const sampleMenu = [
     price: 45.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Bone-In Cuts",
     item: "Bone-In Filet Mignon* 14 Oz.",
@@ -90,7 +91,7 @@ const sampleMenu = [
     price: 62.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Bone-In Cuts",
     item: "Double-Cut Lamb Chops* 14 Oz.",
@@ -98,7 +99,7 @@ const sampleMenu = [
     price: 48.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Bone-In Cuts",
     item: "Prime Bone-In Cowboy Ribeye* 22 Oz.",
@@ -106,7 +107,7 @@ const sampleMenu = [
     price: 57.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Bone-In Cuts",
     item: "Tomahawk Ribeye* 32 Oz.",
@@ -114,7 +115,7 @@ const sampleMenu = [
     price: 99.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Seafood",
     item: "Chargrilled Salmon*",
@@ -122,7 +123,7 @@ const sampleMenu = [
     price: 38.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "dinner",
     category: "Seafood",
     item: "Fried Shrimp",
@@ -130,7 +131,7 @@ const sampleMenu = [
     price: 32.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Sparking Wines",
     item: "MV Jeio Bisol Prosecco, Veneto, Italy - Glass",
@@ -138,7 +139,7 @@ const sampleMenu = [
     price: 12.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Sparking Wines",
     item: "MV Jeio Bisol Prosecco, Veneto, Italy - Bottle",
@@ -146,7 +147,7 @@ const sampleMenu = [
     price: 48.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Sparking Wines",
     item: "MV Domaine Chandon Brut, California - Glass",
@@ -154,7 +155,7 @@ const sampleMenu = [
     price: 16.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Sparking Wines",
     item: "MV Domaine Chandon Brut, California - Bottle",
@@ -162,7 +163,7 @@ const sampleMenu = [
     price: 64.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "White Wines & Rosé",
     item: "2017 Marques de Caceres Dry Rosé, Rioja, Spain - Glass",
@@ -170,7 +171,7 @@ const sampleMenu = [
     price: 8.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "White Wines & Rosé",
     item: "2017 Marques de Caceres Dry Rosé, Rioja, Spain - Bottle",
@@ -178,7 +179,7 @@ const sampleMenu = [
     price: 32.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "White Wines & Rosé",
     item: "MV Castello del Poggio Moscato, Italy - Glass",
@@ -186,7 +187,7 @@ const sampleMenu = [
     price: 10.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "White Wines & Rosé",
     item: "MV Castello del Poggio Moscato, Italy - Bottle",
@@ -194,7 +195,7 @@ const sampleMenu = [
     price: 40.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "White Wines & Rosé",
     item: "2017 Hess 'Shirtail Ranches' Chardonnay, California - Glass",
@@ -202,7 +203,7 @@ const sampleMenu = [
     price: 10.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "White Wines & Rosé",
     item: "2017 Hess 'Shirtail Ranches' Chardonnay, California - Bottle",
@@ -210,7 +211,7 @@ const sampleMenu = [
     price: 40.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Red Wines",
     item: "2016 Perrin Reserve Cotes du Rhone, Southern Rhone, France - Glass",
@@ -218,7 +219,7 @@ const sampleMenu = [
     price: 9.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Red Wines",
     item: "2016 Perrin Reserve Cotes du Rhone, Southern Rhone, France - Bottle",
@@ -226,7 +227,7 @@ const sampleMenu = [
     price: 36.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Red Wines",
     item: "2017 J. Lohr Pinot Noir, Monterey - Glass",
@@ -234,7 +235,7 @@ const sampleMenu = [
     price: 10.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Red Wines",
     item: "2017 J. Lohr Pinot Noir, Monterey - Bottle",
@@ -242,7 +243,7 @@ const sampleMenu = [
     price: 40.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Red Wines",
     item: "2017 Cartlidge & Browne Cabernet, California - Glass",
@@ -250,7 +251,7 @@ const sampleMenu = [
     price: 11.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Red Wines",
     item: "2017 Cartlidge & Browne Cabernet, California - Bottle",
@@ -258,7 +259,7 @@ const sampleMenu = [
     price: 44.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Red Wines",
     item: "2017 TintoNegro Malbec, Uco Valley, Mendoza - Glass",
@@ -266,7 +267,7 @@ const sampleMenu = [
     price: 11.00
   },
   {
-    restaurant_id: 000,
+    restaurant_id: 100,
     menuType: "wine",
     category: "Red Wines",
     item: "2017 TintoNegro Malbec, Uco Valley, Mendoza - Bottle",

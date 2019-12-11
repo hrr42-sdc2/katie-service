@@ -1,0 +1,61 @@
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  margin: 15px 280px 0px 120px;
+  position: absolute;
+  display: grid;
+  grid-template-rows: 100% 100% 100%;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.list {
+  column-count: 2;
+}
+
+
+
+.list1, .list2, .list3, .list4, .list5{
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.60em;
+  padding: 0px 0px 5px 0px;
+  font-weight: 500;
+}
+
+
+.item-name {
+  color:black;
+  font-size: 0.45em;
+  font-weight: 500;
+  width:80%;
+  padding: 5px 0px;
+  float:left;
+}
+
+.item-description {
+  color: black;
+  font-size: 0.45em;
+  padding:0px 0px 8px 0px;
+  font-weight: 200;
+}
+
+.item-price {
+  color: black;
+  font-size: 0.45em;
+  font-weight:500;
+  padding: 5px 0px;
+}
+
+button{
+  font-size: 0.45em;
+  padding: 5.3px;
+  margin: 8px 8px 8px 0px;
+  font-weight:500;
+  color:	rgb(64,64,64);
+
+}
+button:focus{
+  outline: red auto 2px;
+}
+
