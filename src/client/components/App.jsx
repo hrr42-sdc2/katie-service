@@ -90,14 +90,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="title">
+        <div className="menuTitle">
         <h5>Menu</h5>
         <hr />
         </div>
 
         <div>
-        <span><button onClick={() => this.UpdateDinnerMenu()} > Dinner Menu </button></span>
-        <span><button onClick={() => this.UpdateWineMenu()} > Wine List </button></span>
+        <span><button className="menuButton" onClick={() => this.UpdateDinnerMenu()} > Dinner Menu </button></span>
+        <span><button className="menuButton" onClick={() => this.UpdateWineMenu()} > Wine List </button></span>
         <hr />
         </div>
 

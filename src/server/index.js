@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const MenuList = require('../database/index.js');
 
@@ -10,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/../../dist'));
+app.use(cors());
 
 app.get('/api/dinner', function(req, res) {
   res.status(200);
