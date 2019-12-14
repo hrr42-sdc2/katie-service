@@ -17,7 +17,7 @@ class App extends React.Component {
 
   UpdateDinnerMenu() {
     $.ajax({
-      url: 'http://localhost:3003/api/dinner',
+      url: '/api/dinner',
       method: 'GET',
       success: data => { console.log(data);
       this.setState({view: 'dinner', postData: data});
@@ -28,7 +28,7 @@ class App extends React.Component {
 
   UpdateWineMenu() {
     $.ajax({
-      url: 'http://localhost:3003/api/wine',
+      url: '/api/wine',
       method: 'GET',
       success: data => { console.log(data);
       this.setState({view: 'wine', postData: data});
