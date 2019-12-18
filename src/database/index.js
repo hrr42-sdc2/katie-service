@@ -4,12 +4,12 @@ const db = require('./menu.js');
 mongoose.Promise = global.Promise;
 
 const menuSchema = new mongoose.Schema({
-  restaurant_id: {type:Number, unique: true},
-  menuType: {type:String, unique: true},
-  category: {type:String,unique: true},
-  item: {type:String, unique: true},
-  description: {type:String, unique: true},
-  price: {type:Number, unique: true, dropDups: true}
+  restaurant_id: {type: Number},
+  menuType: {type: String},
+  category: {type: String},
+  item: {type: String},
+  description: {type: String},
+  price: {type:Number, dropDups: true}
 });
 
 const MenuList = mongoose.model('MenuList', menuSchema);
@@ -21,7 +21,6 @@ const MenuList = mongoose.model('MenuList', menuSchema);
 //     })
 //   });
 // });
-
 
 let fetch = (menuOrder, cb) => {
   MenuList
@@ -35,7 +34,6 @@ let fetch = (menuOrder, cb) => {
   });
 }
 
-module.exports = MenuList;
-module.exports.fetch = fetch;
+module.exports = { MenuList, fetch };
 
 

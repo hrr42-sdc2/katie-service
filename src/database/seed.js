@@ -277,7 +277,7 @@ const sampleMenu = [
 ];
 
 const insertSampleMenu = function() {
-  MenuList.create(sampleMenu)
+  MenuList.MenuList.create(sampleMenu)
 };
 
 insertSampleMenu();
