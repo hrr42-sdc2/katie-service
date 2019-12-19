@@ -14,26 +14,57 @@ const menuSchema = new mongoose.Schema({
 
 const MenuList = mongoose.model('MenuList', menuSchema);
 
-// MenuList.find({menuType:'wine'}, function(err,doc) {
-//   doc.forEach((item,index) =>{
-//     item.remove(function(err,doc) {
-//       console.log(doc);
-//     })
-//   });
-// });
+let addMenuItem = (menuItem, cb) => {
+  MenuList.create(menuItem, (err, menu) => {
+    if (err) throw err;
+    cb();
+  })
+};
 
-let fetch = (menuOrder, cb) => {
+let fetch = (menuInfo, cb) => {
   MenuList
-  .find({restaurant_id: 100, menuType: menuOrder})
+  .find({restaurant_id: menuInfo.restaurantId, menuType: menuInfo.menuType})
   .exec((err, menu) => {
     if (err) {
-      console.log("Cannot get menu" + menuOrder)
+      console.log("Cannot get menu" + menuInfo)
     };
-    console.log(menu);
     cb(menu); //res.send(menu);
   });
-}
+};
 
-module.exports = { MenuList, fetch };
+let updateMenu = (query, newData, cb) => {
+  MenuList.update(query, newData, (err, doc) => {
+    if (err) throw err;
+    cb();
+  })
+};
+
+let deleteItem = (item, cb) => {
+  MenuList.remove({
+    _id: item.itemId,
+  }, (err, menu) => {
+    if (err) throw err;
+    cb();
+  });
+};
+
+let deleteMenu = (menu, cb) => {
+  MenuList.remove({
+    restaurantId: menu.restaurantId,
+    menuType: menu.menuType
+  }, (err, menu) => {
+    if (err) throw err;
+    cb();
+  });
+};
+
+module.exports = {
+  MenuList,
+  addMenuItem,
+  fetch,
+  updateMenu,
+  deleteMenu,
+  deleteItem
+};
 
 
