@@ -1,4 +1,4 @@
-# Project Name
+# Team Cannoli's OpenTable
 
 > Project description
 
