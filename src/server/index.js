@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../../dist'));
 app.use(cors());
 
+
 app.post('/menu/:restaurantId', (req, res) => {
   db.addMenuItem(req.body)
   .then(() => {
@@ -25,11 +26,11 @@ app.post('/menu/:restaurantId', (req, res) => {
 
 app.get('/menu/:restaurantId/:menuType', (req, res) => {
   db.fetch(req.params)
-  .then((data) => {
-    res.send(data);
+  .then((menu) => {
+    res.send(menu);
   })
   .catch(() => {
-    res.sendStatus(404);
+    res.sendStatus(404)
   })
 });
 
@@ -45,7 +46,7 @@ app.put('/menu/:restaurantId', function(req, res) {
 
 // deletes a given item on a menu
 app.delete('/menu/:restaurantId/', function(req, res) {
-  db.deleteItem(req.params, req.body)
+  db.deleteItem(req.body)
   .then(() => {
     res.sendStatus(200);
   })
@@ -56,7 +57,7 @@ app.delete('/menu/:restaurantId/', function(req, res) {
 
 // deletes a given menu
 app.delete('/menu/:restaurantId/:menuType', function(req, res) {
-  db.deleteMenu(req.params, req.body)
+  db.deleteMenu(req.params)
   .then(() => {
     res.sendStatus(200);
   })

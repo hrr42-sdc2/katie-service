@@ -30,7 +30,7 @@ let fetch = (menuInfo) => {
   .then((menu) => {
     return menu;
   })
-  .catch((err) => {
+  .catch(err => {
     return err;
   })
 };
@@ -40,29 +40,33 @@ let updateMenu = (data) => {
   .then((menu) => {
     return menu;
   })
-  .catch((err) => {
+  .catch(err => {
     return err;
   })
 };
 
-let deleteItem = (id, data) => {
+let deleteItem = (item) => {
   return MenuList.findOneAndDelete({
-    item: data.item
+    item: item
   })
   .then((menu) => {
     return menu;
   })
-  .catch((err) => {
+  .catch(err => {
     return err;
   })
 };
 
-let deleteMenu = (id, menu) => {
+
+let deleteMenu = (menu, cb) => {
   return MenuList.deleteMany({
-    restaurantId: id.restaurantId,
+    restaurantId: menu.restaurantId,
     menuType: menu.menuType
   })
-  .catch((err) => {
+  .then((menu) => {
+    return menu;
+  })
+  .catch(err => {
     return err;
   })
 };
