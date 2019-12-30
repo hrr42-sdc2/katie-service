@@ -14,12 +14,12 @@ const menuSchema = new mongoose.Schema({
 
 const MenuList = mongoose.model('MenuList', menuSchema);
 
-let addMenuItem = (menuItem, cb) => {
+let addMenuItem = (menuItem) => {
   return MenuList.create(menuItem)
   .then((item) => {
     return item;
   })
-  .catch(err => {
+  .catch((err) => {
     return err;
   })
 };
@@ -56,6 +56,7 @@ let deleteItem = (item) => {
     return err;
   })
 };
+
 
 let deleteMenu = (menu, cb) => {
   return MenuList.deleteMany({
