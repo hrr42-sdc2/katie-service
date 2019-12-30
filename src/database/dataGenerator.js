@@ -3,8 +3,8 @@ const fs = require('fs');
 const writer = require('csv-write-stream');
 const writeMenus = writer();
 
-// currently generating ~13 million records
-const restaurantLimit = 200000;
+// currently generating ~24 million records
+const restaurantLimit = 1000000;
 
 const menuTypes = {
   'Breakfast': ['Pancakes & French Toast', 'Entrées', 'Coffee & Tea'],
@@ -42,8 +42,8 @@ function generateData() {
     menus.forEach(menu => {
       if(menuTypes[menu] !== null) {
         menuTypes[menu].forEach(category => {
-          // generate a number of menu items for each category between 5 and 20
-          let numOfItems = generateNum(20, 5);
+          // generate a number of menu items for each category between 5 and 10
+          let numOfItems = generateNum(10, 5);
           for(let j = 0; j < numOfItems; j++) {
             bufferBelowThreshold = writeToFile(id, menu, category);
           }
@@ -53,7 +53,7 @@ function generateData() {
     id++;
 
     if(id === restaurantLimit) {
-      console.log('done');
+      console.log(lines);
       writeMenus.end();
     }
   } while(id < restaurantLimit && bufferBelowThreshold);
