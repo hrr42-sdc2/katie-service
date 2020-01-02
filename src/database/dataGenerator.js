@@ -53,7 +53,6 @@ function generateData() {
     id++;
 
     if(id === restaurantLimit) {
-      console.log(lines);
       writeMenus.end();
     }
   } while(id < restaurantLimit && bufferBelowThreshold);
