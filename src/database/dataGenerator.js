@@ -3,8 +3,8 @@ const fs = require('fs');
 const writer = require('csv-write-stream');
 const writeMenus = writer();
 
-// currently generating ~24 million records
-const restaurantLimit = 1000000;
+// currently generating ~240 million records
+const restaurantLimit = 10000000;
 
 const menuTypes = {
   'Breakfast': ['Pancakes & French Toast', 'Entrées', 'Coffee & Tea'],
