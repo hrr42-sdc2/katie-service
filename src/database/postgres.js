@@ -32,7 +32,7 @@ pool.connect()
     writeStream.on('end', () => {
       client.query("SELECT COUNT(*) FROM menus")
       .then(results => {
-        console.log('Rows inserted: ' + results.rows[0].count); })
+        console.log('Rows inserted: ' + results.rows[0].count);
         client.query("CREATE INDEX id_index ON menus (restaurant_id)")
           .then(client => client.release())
           .catch(err => {
