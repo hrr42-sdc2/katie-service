@@ -7,9 +7,10 @@ const pool = new Pool({
 });
 
 pool.query(`CREATE TABLE IF NOT EXISTS menus (
-  restaurant_id bigint,
+  restaurant_id int,
   menu_type varchar(50),
   category varchar(50),
+  item_id int,
   item_name varchar(50),
   details varchar(250),
   price decimal(12,2)
@@ -44,10 +45,11 @@ pool.connect()
         console.log(err.stack);
         client.release();
       })
-
+    })
     readStream.pipe(writeStream);
   })
   .catch(err => {
     pool.end();
     console.log(err);
   });
+

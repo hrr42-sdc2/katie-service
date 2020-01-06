@@ -17,11 +17,12 @@ const menuTypes = {
 
 const generateNum = (max, min) =>  Math.floor(Math.random() * (max - min)) + 1;
 
-const writeToFile = (restaurantId, menuType, category) => {
+const writeToFile = (restaurantId, menuType, category, itemId) => {
   return writeMenus.write({
     restaurant_id: restaurantId,
     menu_type: menuType,
     category: category,
+    item_id: itemId,
     item_name: faker.commerce.product(),
     details: faker.commerce.productName(),
     price: faker.finance.amount(1, 80, 2),
@@ -30,6 +31,7 @@ const writeToFile = (restaurantId, menuType, category) => {
 
 writeMenus.pipe(fs.createWriteStream('menus.csv'));
 let id = 1;
+let itemId = 1;
 
 function generateData() {
   let bufferBelowThreshold = true;
@@ -45,7 +47,8 @@ function generateData() {
           // generate a number of menu items for each category between 5 and 10
           let numOfItems = generateNum(10, 5);
           for(let j = 0; j < numOfItems; j++) {
-            bufferBelowThreshold = writeToFile(id, menu, category);
+            bufferBelowThreshold = writeToFile(id, menu, category, itemId);
+            itemId++;
           }
         })
       }
@@ -55,7 +58,7 @@ function generateData() {
     if(id === restaurantLimit) {
       writeMenus.end();
     }
-  } while(id < restaurantLimit && bufferBelowThreshold);
+  } while(id < restaurantLimit + 1 && bufferBelowThreshold);
 
   if(id < restaurantLimit) {
     writeMenus.once('drain', generateData);
