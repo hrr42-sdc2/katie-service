@@ -1,8 +1,9 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const db = require('../database/mongodb/index.js');
+const db = require('../database/postgres.js');
 
 const app = express();
 const Port = process.env.PORT || 3003;
@@ -24,10 +25,20 @@ app.post('/menu/:restaurantId', (req, res) => {
   })
 });
 
+app.get('/menu/:restaurantId', (req, res) => {
+  return db.getMenus(req.params)
+  .then((menus) => {
+    res.send(menus.rows);
+  })
+  .catch(() => {
+    res.sendStatus(404)
+  })
+});
+
 app.get('/menu/:restaurantId/:menuType', (req, res) => {
-  db.fetch(req.params)
-  .then((menu) => {
-    res.send(menu);
+  return db.getMenuItems(req.params)
+  .then((menus) => {
+    res.send(menus.rows);
   })
   .catch(() => {
     res.sendStatus(404)

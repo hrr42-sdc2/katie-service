@@ -10,104 +10,83 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'dinner',
+      restaurantId: Math.floor(Math.random() * 10000000) + 1,
+      view: null,
+      menuTypes: null,
       postData: []
     }
+    this.fetchMenus = this.fetchMenus.bind(this);
+    this.fetchItems = this.fetchItems.bind(this);
   }
 
-  UpdateDinnerMenu() {
+  fetchMenus() {
+    console.log(this.state.restaurantId);
     $.ajax({
-      url: '/api/dinner',
+      url: '/menu/' + this.state.restaurantId,
       method: 'GET',
-      success: data => { console.log(data);
-      this.setState({view: 'dinner', postData: data});
+      success: data => {
+        let menuTypes = [];
+        data.forEach(item => {
+          if(menuTypes.indexOf(item.menu_type) < 0) {
+            menuTypes.push(item.menu_type);
+          }
+        });
+        this.setState({
+          menuTypes: menuTypes
+        });
+        this.fetchItems(data[0].menu_type);
       },
-      error: () => {console.log('GET error!');}
+      error: () => {
+        console.log('GET error!');
+      }
     });
   }
 
-  UpdateWineMenu() {
+  fetchItems(menuType) {
     $.ajax({
-      url: '/api/wine',
+      url: '/menu/' + this.state.restaurantId + '/' + menuType,
       method: 'GET',
-      success: data => { console.log(data);
-      this.setState({view: 'wine', postData: data});
+      success: data => {
+        this.setState({
+          view: menuType,
+          postData: data
+        })
       },
-      error: () => {console.log('GET error!');}
+      error: () => {
+        console.log('GET error!');
+      }
     });
-  }
+  };
 
   componentDidMount() {
-    this.UpdateDinnerMenu();
-  }
-
-  renderView() {
-    const {view} = this.state;
-
-    if (view === 'dinner') {
-      let starters = this.state.postData.filter(function(meal) {
-        return meal.category === 'Starters'
-      });
-      let steaks = this.state.postData.filter(function(meal) {
-        return meal.category === 'Steaks & Chops'
-      });
-      let bone = this.state.postData.filter(function(meal) {
-        return meal.category === 'Bone-In Cuts'
-      });
-      let seafood = this.state.postData.filter(function(meal) {
-        return meal.category === 'Seafood'
-      });
-
-      return (
-        <div className='lists'>
-          <div className='list1'>Starters</div>
-          <Menu menuList={starters} />
-          <hr />
-          <div className='list2'>Steaks & Chops</div>
-          <Menu menuList={steaks} />
-          <hr />
-          <div className='list3'>Bone-In Cuts</div>
-          <Menu menuList={bone} />
-          <hr />
-          <div className='list4'>Seafood</div>
-          <Menu menuList={seafood} />
-          <hr />
-        </div>
-
-      );
-  } else {
-    return (
-      <div>
-      <div className='list5'>Wine</div>
-
-      <Menu menuList={this.state.postData} />
-      </div>
-    )
-  }
-
-  }
+    this.fetchMenus();
+  };
 
   render() {
-    return (
-      <div>
-        <div className="menuTitle">
-        <h5>Menu</h5>
-        <hr />
-        </div>
-
+    if(this.state.view) {
+      return (
         <div>
-        <span><button className="menuButton" onClick={() => this.UpdateDinnerMenu()} > Dinner Menu </button></span>
-        <span><button className="menuButton" onClick={() => this.UpdateWineMenu()} > Wine List </button></span>
-        <hr />
+          <div className="menuTitle">
+          <h5>Menu</h5>
+          <hr />
+          </div>
+          <div>
+          {this.state.menuTypes.map(menu =>
+            <span key={menu}><button className="menuButton" key={menu} value={menu} onClick={() => this.fetchItems(menu)} >{menu}</button></span>
+          )}
+          <hr />
+          </div>
+          <div>
+          <div className='lists'>
+            <Menu menuList={this.state.postData}/>
+          </div>
         </div>
-
-        <div>
-          {this.renderView()}
         </div>
-
-      </div>
-    )
+      )
+    } else {
+      return <div></div>
+    }
   }
+};
 
-}
 export default App;
