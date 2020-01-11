@@ -1,0 +1,23 @@
+config:
+  target: 'http://127.0.0.1:3003'
+  processor: './artillery-test.js'
+  phases:
+    - duration: 30
+      arrivalRate: 5
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+    - duration: 300
+      arrivalRate: 50
+scenarios:
+  - name: 'Get menus and post menu items'
+    flow:
+      - loop:
+        - function: 'getRestaurantMenus'
+        - get:
+            url: "/menu/{{ id }}"
+        - function: 'addItem'
+        - post:
+            url: "/menu/{{ id }}"
+            json: {{ item }}
+        count: 20
