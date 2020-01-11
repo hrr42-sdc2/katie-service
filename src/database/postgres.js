@@ -3,8 +3,17 @@ const fs = require('fs');
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  database: 'menusdb'
+  database: 'menusdb',
+  min: 2,
+  max: 10,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis:  3000
 });
+
+pool.on('error', (err, client) => {
+  console.error('Unexpected error on idle client', err)
+  process.exit(-1)
+})
 
 // pool.connect()
 //   .then(client => {
@@ -36,6 +45,10 @@ const pool = new Pool({
 //     pool.end();
 //     console.log(err);
 //   });
+const insertQuery = {
+  name: 'insert-item',
+  text: `INSERT INTO menus VALUES ($1,$2,$3,$4,$5,$6,%7)`
+};
 
 const menuQuery = {
   name: 'fetch-menu',
@@ -43,20 +56,98 @@ const menuQuery = {
 };
 
 const itemsQuery = {
-  name: 'fetch-menu',
+  name: 'fetch-menu-type',
   text: 'SELECT * FROM menus WHERE restaurant_id = $1 AND menu_type = $2'
+};
+
+const deleteMenuQuery = {
+  name: 'delete-menu',
+  text: 'DELETE FROM menus WHERE restaurant_id = $1 AND menu_type = $2'
+}
+
+const deleteItemQuery = {
+  name: 'delete-item',
+  text: 'DELETE FROM menus WHERE restaurant_id = $1 AND item_id = $2'
+}
+
+const addMenuItem = (data) => {
+  insertQuery.values = data;
+  return pool.connect()
+  .then(client => {
+    return client.query(insertQuery)
+    .then(res => {
+      client.release()
+      return res;
+    })
+    .catch(err => {
+      client.release();
+      return err;
+    })
+  })
 };
 
 const getMenus = (info) => {
   menuQuery.values = [info.restaurantId];
-  pool.connect();
-  return pool.query(menuQuery);
-}
+  return pool.connect()
+  .then(client => {
+    return client.query(menuQuery)
+    .then(res => {
+      client.release()
+      return res;
+    })
+  })
+  .catch(err => {
+    client.release();
+    return err;
+  });
+};
 
 const getMenuItems = (info) => {
   itemsQuery.values = [info.restaurantId, info.menuType];
-  pool.connect();
-  return pool.query(itemsQuery);
-}
+  return pool.connect()
+  .then(client => {
+    return client.query(itemsQuery)
+    .then(res => {
+      client.release()
+      return res;
+    })
+  })
+  .catch(err => {
+    client.release();
+    return err;
+  });
+};
 
-module.exports = {getMenus, getMenuItems};
+const deleteMenu = (info) => {
+  deleteMenuQuery.values = [info.restaurantId, info.menuType];
+  pool.connect()
+  then(client => {
+    return client.query(deleteMenuQuery)
+    .then(res => {
+      client.release()
+      return res;
+    })
+  })
+  .catch(err => {
+    client.release();
+    return err;
+  });
+};
+
+const deleteItem = (info) => {
+  deleteItemQuery.values = [info.restaurantId, info.itemId];
+  pool.connect()
+  then(client => {
+    return client.query(deleteItemQuery)
+    .then(res => {
+      client.release()
+      return res;
+    })
+  })
+  .catch(err => {
+    client.release();
+    return err;
+  });
+};
+
+module.exports = {addMenuItem, getMenus, getMenuItems, deleteMenu, deleteItem};
