@@ -16,7 +16,11 @@ app.use(cors());
 
 
 app.post('/menu/:restaurantId', (req, res) => {
-  db.addMenuItem(req.body)
+  let item = [];
+  for(var key in req.body) {
+    item.push(req.body[key]);
+  }
+  db.addMenuItem(item)
   .then(() => {
     res.sendStatus(201);
   })
@@ -26,18 +30,20 @@ app.post('/menu/:restaurantId', (req, res) => {
 });
 
 app.get('/menu/:restaurantId', (req, res) => {
-  return db.getMenus(req.params)
-  .then((menus) => {
-    res.send(menus.rows);
+  db.getMenus(req.params)
+  .then(menus => {
+    if(!menus.rows) throw err;
+    res.send(menus.rows)
   })
-  .catch(() => {
+  .catch((err) => {
     res.sendStatus(404)
   })
 });
 
 app.get('/menu/:restaurantId/:menuType', (req, res) => {
-  return db.getMenuItems(req.params)
-  .then((menus) => {
+  db.getMenuItems(req.params)
+  .then(menus => {
+    if(!menus.rows) throw err;
     res.send(menus.rows);
   })
   .catch(() => {
@@ -56,8 +62,8 @@ app.put('/menu/:restaurantId', function(req, res) {
 });
 
 // deletes a given item on a menu
-app.delete('/menu/:restaurantId/', function(req, res) {
-  db.deleteItem(req.body)
+app.delete('/menu/:restaurantId/:itemId', function(req, res) {
+  db.deleteItem(req.params)
   .then(() => {
     res.sendStatus(200);
   })
